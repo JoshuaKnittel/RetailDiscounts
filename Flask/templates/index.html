@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% block content %}
+    <section class="deine_angebote">
+      <div class="angebote-heading">
+        <strong>Deine Angebote</strong>
+        <!-- <p>Es ist Spartag, meine Kerle!</p> -->
+      </div>
+
+      <div class="product-container">
+        <!--product-box-1---------->
+        {% for offer in offers %}
+        <div class="product-box">
+          <!--product-img------------>
+          <div class="product-img">
+            <!--img------>
+            <!-- <img src="{{url_for('static', filename='sample_img.jpg')}}" /> -->
+            <img src="/static/apple.jpg" />
+          </div>
+          <!--product-details-------->
+          <div class="product-details">
+            <a href="{{offer.product_page_url}}" class="name">{{offer.name}}</a>
+            <div class="price">
+              <span class="price-now">{{offer.price}}</span>
+              <span class="price-before">{{offer.price_before}}</span>
+            </div>
+            <div class="date">
+              <span class="date-from"
+                >{{offer.from_date.strftime('%d.%m')}}</span
+              >
+              <span>-</span>
+              <span class="date-to">{{offer.to_date.strftime('%d.%m')}}</span>
+            </div>
+            {% if offer.company == "Company 1" %}
+            <div class="company-company1">{{offer.company}}</div>
+            {% elif offer.company == "Company 2" %}
+            <div class="company-company2">{{offer.company}}</div>
+            {% else %}
+            <div class="company-company3">{{offer.company}}</div>
+            {% endif %}
+            <!-- <span class="company">{{offer.company}}</span> -->
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    {% endblock %}
+  </body>
+</html>
